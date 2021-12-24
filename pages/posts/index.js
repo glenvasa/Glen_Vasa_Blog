@@ -1,38 +1,22 @@
 import AllPosts from "../../components/posts/all-posts"
+import {getAllPosts} from '../../lib/posts-util'
 
-const DUMMY_POSTS = [
-  {
-    slug: 'getting-started-with-nextjs',
-    title: 'Getting Started with NextJS',
-    image: 'getting-started-nextjs.png',
-    excerpt: 'NextJS is the React framework for producition - it makes building fullstack React apps and sites a breeze and ships with built-in SSR.',
-    date: '2022-02-10'
-  },
-  {
-    slug: 'getting-started-with-nextjs2',
-    title: 'Getting Started with NextJS',
-    image: 'getting-started-nextjs.png',
-    excerpt: 'NextJS is the React framework for producition - it makes building fullstack React apps and sites a breeze and ships with built-in SSR.',
-    date: '2022-02-10'
-  },
-  {
-    slug: 'getting-started-with-nextjs3',
-    title: 'Getting Started with NextJS',
-    image: 'getting-started-nextjs.png',
-    excerpt: 'NextJS is the React framework for producition - it makes building fullstack React apps and sites a breeze and ships with built-in SSR.',
-    date: '2022-02-10'
-  },
-  {
-    slug: 'getting-started-with-nextjs4',
-    title: 'Getting Started with NextJS',
-    image: 'getting-started-nextjs.png',
-    excerpt: 'NextJS is the React framework for producition - it makes building fullstack React apps and sites a breeze and ships with built-in SSR.',
-    date: '2022-02-10'
+   
+
+function AllPostsPage(props){
+  return <AllPosts posts={props.posts}/>
+}
+
+export function getStaticProps(){
+  const allPosts = getAllPosts()
+
+  // we dont' need a revalidate property b/c we likely aren't updating blog posts numerous/several times a day
+  // so it's ok to regenerate the page during each new build
+  return {
+    props: {
+      posts: allPosts
+    }
   }
-]
-
-function AllPostsPage(){
-  return <AllPosts posts={DUMMY_POSTS}/>
 }
 
 export default AllPostsPage
