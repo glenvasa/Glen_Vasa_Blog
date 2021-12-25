@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
+    "mongodb": "^4.2.2",
     "next": "10.0.6",
     "next-transpile-modules": "^9.0.0",
     "react": "17.0.1",
