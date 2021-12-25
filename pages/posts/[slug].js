@@ -1,12 +1,20 @@
 // slug is a human readable identifier such as blog title with dashes separating words; 
 // better for seo than if we just used post id as identifier
-
+import Head from 'next/head'
+import {Fragment} from 'react'
 import PostContent from "../../components/posts/post-detail/post-content"
 import {getPostData, getPostsFiles} from '../../lib/posts-util'
 
 function PostDetailPage(props){
     return (
-        <PostContent post={props.post}/>
+        <Fragment>
+            <Head>
+                <title>{props.post.title}</title>
+                <meta name="description" content={props.post.excerpt}/>
+            </Head>
+          <PostContent post={props.post}/>   
+        </Fragment>
+       
     )
 }
 
