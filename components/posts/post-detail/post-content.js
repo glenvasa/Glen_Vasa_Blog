@@ -1,7 +1,9 @@
 import ReactMarkdown from "react-markdown";
 import classes from "./post-content.module.css";
 import PostHeader from "./post-header";
-import Image from 'next/image'
+import Image from "next/image";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 function PostContent(props) {
   const { post } = props;
@@ -16,26 +18,39 @@ function PostContent(props) {
     //     return <Image src={`/images/posts/${post.slug}/${image.src}`} alt={image.alt} width={600} height={300}/>
     // },
     p(paragraph) {
-        const { node } = paragraph;
-        // we only want to override paragraph if it is an img paragraph (in markdown images rendered inside paragraphs by default)
-        if (node.children[0].tagName === 'img') {
-          const image = node.children[0];
+      const { node } = paragraph;
+      // we only want to override paragraph if it is an img paragraph (in markdown images rendered inside paragraphs by default)
+      if (node.children[0].tagName === "img") {
+        const image = node.children[0];
 
-          return (
-            <div className={classes.image}>
-              <Image
-                src={`/images/posts/${post.slug}/${image.properties.src}`}
-                alt={image.alt}
-                width={600}
-                height={300}
-              />
-            </div>
-          );
-        }
+        return (
+          <div className={classes.image}>
+            <Image
+              src={`/images/posts/${post.slug}/${image.properties.src}`}
+              alt={image.alt}
+              width={600}
+              height={300}
+            />
+          </div>
+        );
+      }
 
-        return <p>{paragraph.children}</p>
-  }}
+      return <p>{paragraph.children}</p>;
+    },
+    // customize how code snippets are handled
+    // giving internal error so will comment out for now
 
+    // code(code) {
+    //   const { language, value } = code;
+    //   return (
+    //     <SyntaxHighlighter
+    //       style={atomDark}
+    //       language={language}
+    //       children={value}
+    //     />
+    //   );
+    // },
+  };
 
   return (
     <article className={classes.content}>
